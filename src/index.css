@@ -55,3 +55,8 @@ table{
 #goldStock {
 	background-color: #e3cb39;
 }
+
+#chart {
+	width:100%;
+	height:100%;
+}
