@@ -1,23 +1,28 @@
-//import stylesheet from './stocktab.css' assert { type: 'css' };
+import stylesheet from './stocktab.css' assert { type: 'css' };
 
 export class TotalTab extends HTMLElement {
 	#shadowRoot
 
+	#turnNumberLabel
 	#buyValueLabel
 	#sellValueLabel
+	#networthLabel
 	#remainingLiquidValueLabel
 	#confirmTradeButton
+	#endTurnButton
 
 	#liquidValue
     #networthValue
+    #previousNetworth
 	#buyValue
 	#sellValue
+	#turnNumber
 	constructor() {
 		// Always call super first in constructor
 		super();
 		//Isolate css to this
 		this.#shadowRoot = this.attachShadow({ mode: 'open'})
-		//shadowRoot.adoptedStyleSheets = [stylesheet]
+		this.#shadowRoot.adoptedStyleSheets = [stylesheet]
 	}
 
 	async connectedCallback() {
@@ -25,6 +30,7 @@ export class TotalTab extends HTMLElement {
 
 			this.#buyValue = 0
             this.#sellValue = 0
+            this.#previousNetworth = 10000
 
 			this.#shadowRoot.innerHTML = await res.text()
 
@@ -33,6 +39,7 @@ export class TotalTab extends HTMLElement {
 
 			this.#buyValueLabel = this.#shadowRoot.getElementById("buyTotal")
 			this.#sellValueLabel = this.#shadowRoot.getElementById("sellTotal")
+			this.#networthLabel = this.#shadowRoot.getElementById("networthLabel")
 
 			this.#remainingLiquidValueLabel = this.#shadowRoot.getElementById("remainingLiquid")
 
@@ -40,6 +47,13 @@ export class TotalTab extends HTMLElement {
             this.#confirmTradeButton.onclick = (event) => {
                                 			this.confirmTrade()
                                 		}
+
+			this.#turnNumberLabel = this.#shadowRoot.getElementById("turnNumber")
+			this.#turnNumber = 1
+			this.#endTurnButton = this.#shadowRoot.getElementById("endTurn")
+			this.#endTurnButton.onclick = (event) => {
+                                            			this.endTurn()
+                                            		}
 		}
 
 	// Setters
@@ -97,6 +111,11 @@ export class TotalTab extends HTMLElement {
 		return this.#sellValue - this.#buyValue + this.getLiquidValue()
 	}
 
+	getNetworthValue()
+	{
+		return parseInt(this.#networthValue.value)
+	}
+
 	// Modifiers
 	addDividend(div)
 	{
@@ -110,6 +129,22 @@ export class TotalTab extends HTMLElement {
 		this.setToSellValue(0)
 		this.dispatchEvent(new CustomEvent("confirmTrade",{
         				}));
+	}
+
+	calculateNetworthChange()
+	{
+		var change = ((this.getNetworthValue() / this.#previousNetworth * 100) - 100)
+		return change.toFixed(2)
+	}
+
+	endTurn()
+	{
+		this.#networthLabel.textContent = "Networth (" + this.calculateNetworthChange() + "%)"
+		this.#previousNetworth = this.getNetworthValue()
+		this.#turnNumber = this.#turnNumber + 1
+		this.#turnNumberLabel.textContent = "Turn " + this.#turnNumber
+		this.dispatchEvent(new CustomEvent("endTurn",{
+                				}));
 	}
 
 	// Update

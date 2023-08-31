@@ -1,4 +1,4 @@
-//import stylesheet from './stocktab.css' assert { type: 'css' };
+import stylesheet from './stocktab.css' assert { type: 'css' };
 
 export class LabelTab extends HTMLElement {
     #shadowRoot
@@ -8,7 +8,7 @@ export class LabelTab extends HTMLElement {
 
         //Isolate css to this
         this.#shadowRoot = this.attachShadow({ mode: 'open'})
-        //shadowRoot.adoptedStyleSheets = [stylesheet]
+        this.#shadowRoot.adoptedStyleSheets = [stylesheet]
     }
 
     async connectedCallback() {
