@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Stock Ticker</title>
+    <link rel="stylesheet" href="index-mobile.css">
+    <script src="StockTab.js" type="module"></script>
+    <script src="TotalTab.js" type="module"></script>
+    <script src="LabelTab.js" type="module"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+</head>
+<body>
+    <table id="fullTable">
+        <tr id="buttonRow">
+            <td>
+                <div>
+                    <button class="tablink" onclick="openPage('Grain', this, 'yellow')">Grain</button>
+                    <button class="tablink" onclick="openPage('Industrial', this, 'pink')">Industrial</button>
+                    <button class="tablink" onclick="openPage('Bonds', this, 'green')">Bonds</button>
+                    <button class="tablink" onclick="openPage('Oil', this, 'brown')">Oil</button>
+                    <button class="tablink" onclick="openPage('Silver', this, 'grey')">Silver</button>
+                    <button class="tablink" onclick="openPage('Gold', this, 'gold')">Gold</button>
+                    <button class="tablink" onclick="openPage('Totals', this, 'white')" id="defaultOpen">Totals</button>
+                    <button class="tablink" onclick="openPage('Graph', this, 'white')">Graph</button>
+                </div>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+            <div id="Grain" class="tabcontent">
+                <table class="stockTable">
+                    <tr>
+                        <td class="labelTab"><label-tab></label-tab></td>
+                        <td class="stockTab" id="grainStock"><stock-tab title="Grain"></stock-tab></td>
+                    </tr>
+                </table>
+            </div>
+
+            <div id="Industrial" class="tabcontent">
+                <table class="stockTable">
+                    <tr>
+                        <td class="labelTab"><label-tab></label-tab></td>
+                        <td class="stockTab" id="industrialStock"><stock-tab title="Industrial"></stock-tab></td>
+                    </tr>
+                </table>
+            </div>
+
+            <div id="Bonds" class="tabcontent">
+                  <table class="stockTable">
+                    <tr>
+                        <td class="labelTab"><label-tab></label-tab></td>
+                        <td class="stockTab" id="bondsStock"><stock-tab title="Bonds"></stock-tab></td>
+                    </tr>
+                </table>
+            </div>
+
+            <div id="Oil" class="tabcontent">
+                  <table class="stockTable">
+                    <tr>
+                        <td class="labelTab"><label-tab></label-tab></td>
+                        <td class="stockTab" id="oilStock"><stock-tab title="Oil"></stock-tab></td>
+                    </tr>
+                </table>
+            </div>
+
+            <div id="Silver" class="tabcontent">
+                <table class="stockTable">
+                    <tr>
+                        <td class="labelTab"><label-tab></label-tab></td>
+                        <td class="stockTab" id="silverStock"><stock-tab title="Silver"></stock-tab></td>
+                    </tr>
+                </table>
+            </div>
+
+            <div id="Gold" class="tabcontent">
+                <table class="stockTable">
+                    <tr>
+                        <td class="labelTab"><label-tab></label-tab></td>
+                        <td class="stockTab" id="goldStock"><stock-tab title="Gold"></stock-tab></td>
+                    </tr>
+                </table>
+            </div>
+
+            <div id="Totals" class="tabcontent">
+                <table class="stockTable">
+                    <tr>
+                        <td class="totalTab"><total-tab id="totals"></total-tab></td>
+                    </tr>
+                  <tr>
+                      <td id="exportButton"><button>Export</button></td>
+                  </tr>
+                </table>
+            </div>
+
+            <div id="Graph" class="tabcontent">
+                  <table class="stockTable">
+                    <tr>
+                        <td><div id="chart"></div></td>
+                    </tr>
+                </table>
+            </div>
+            </td>
+        </tr>
+    </table>
+
+    <script>
+        function openPage(pageName, elmnt, color) {
+        // Hide all elements with class="tabcontent" by default */
+        var i, tabcontent, tablinks;
+        tabcontent = document.getElementsByClassName("tabcontent");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+        }
+
+        // Remove the background color of all tablinks/buttons
+        tablinks = document.getElementsByClassName("tablink");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].style.backgroundColor = "";
+        }
+
+        // Show the specific tab content
+        document.getElementById(pageName).style.display = "block";
+
+        // Add the specific color to the button used to open the tab content
+        elmnt.style.backgroundColor = color;
+        }
+
+        // Get the element with id="defaultOpen" and click on it
+        document.getElementById("defaultOpen").click();
+
+    </script>
+
+    <script>
+        // Turns
+        var turns = [["Turn","Grain","Industrial","Bonds","Oil","Silver","Gold","Networth"],
+                    [0,0,0,0,0,0,0,10000]]
+        var totalTab = document.querySelector("total-tab")
+
+        var stockTabs = document.querySelectorAll("stock-tab")
+
+        var turnNumber = 1
+
+        totalTab.addEventListener('endTurn', (event) => {
+                                var turnValues = []
+                                turnValues.push(turnNumber)
+                                turnNumber = turnNumber + 1
+
+        						stockTabs.forEach(function(stockTab){
+									turnValues.push(stockTab.getOwnedValue())
+                                })
+                                turnValues.push(totalTab.getNetworthValue())
+                                turns.push(turnValues)
+                                drawChart()
+        					});
+
+
+        //Download
+        var exportButton = document.querySelector("#exportButton")
+        exportButton.onclick = (event) => {
+                                			var csv = ""
+                                            turns.forEach(function(row) {
+                                                csv += row.join(',');
+                                                csv += "\n";
+                                            });
+                                            saveFile(csv)
+                                		}
+
+        async function saveFile(content){
+            var myblob = new Blob([content], {
+            type: 'text/plain'
+            });
+
+            if( window.showSaveFilePicker ) {
+                const opts = {
+                    types: [{
+                      description: 'CSV',
+                      accept: {'text/plain': ['.csv']},
+                    }],
+                    suggestedName: 'StockTicker',
+                  };
+                var handle = await showSaveFilePicker(opts);
+                var writable = await handle.createWritable();
+                await writable.write( myblob );
+                writable.close();
+            }else{
+              alert( "Error opening save file dialog" );
+            }
+        }
+
+        // CHARTS
+        var chart
+        var options
+        var data
+
+        window.addEventListener('resize', (event) => {
+                                chart.clearChart()
+                                chart.draw(data, options);
+        					});
+
+        google.charts.load('current', {'packages':['corechart']});
+        google.charts.setOnLoadCallback(drawChart);
+
+        function drawChart() {
+            var ticks = Array(turnNumber + 1).fill(0).map((e,i)=>i)
+            options = {
+                title: 'Stonks',
+                legend: { position: 'bottom' },
+                format: 'decimal',
+                hAxis: {ticks: ticks},
+                series: {
+                    0: { color: '#eeee82' },
+                    1: { color: '#ea8ad8' },
+                    2: { color: '#c5e0b3' },
+                    3: { color: '#302316' },
+                    4: { color: '#c2c2c2' },
+                    5: { color: '#e3cb39' },
+                    6: { color: '#bf000a' },
+                }
+            };
+
+            data = new google.visualization.DataTable();
+            turns.forEach(function (row, indexRow) {
+                if (indexRow === 0) {
+                    row.forEach(function (column, indexCol) {
+                        data.addColumn('number', column);
+                    });
+                } else {
+                    data.addRow(row);
+                }
+            });
+
+          chart = new google.visualization.LineChart(document.getElementById('chart'));
+
+          chart.draw(data, options);
+        }
+    </script>
+</body>
+</html>

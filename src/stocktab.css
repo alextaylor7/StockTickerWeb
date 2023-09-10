@@ -13,7 +13,7 @@ div, input, button{
 	height:3vh;
 	min-height:3vh;
 	max-height:3vh;
-	margin-bottom: 4px;
+	margin-bottom: 0.4vh;
 }
 
 div, input {
@@ -27,7 +27,9 @@ button{
 
 .label{
 	height:3vh;
-	margin-bottom: 5px;
+	margin-bottom: 0.4vh;
+	margin-right: 0.4vh;
+	text-align: right;
 }
 
 #title{
