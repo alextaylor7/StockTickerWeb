@@ -63,30 +63,33 @@ display: table-cell;
 	width:32%;
 }
 
-#grainStock {
+#grainStock, #Grain {
 	background-color: #eeee82;
 }
 
-#industrialStock {
+#industrialStock, #Industrial {
 	background-color: #ea8ad8;
 }
 
-#bondsStock {
+#bondsStock, #Bonds {
 	background-color: #c5e0b3;
 }
 
-#oilStock {
+#oilStock, #Oil {
 	background-color: #302316;
 	color: #f2f2f2;
 }
 
-#silverStock {
+#silverStock, #Silver {
 	background-color: #f2f2f2;
 }
 
-#goldStock {
+#goldStock, #Gold {
 	background-color: #e3cb39;
 }
+
+#Totals {background-color: white;}
+#Graph {background-color: white;}
 
 #chart {
 	width:100%;
@@ -107,11 +110,11 @@ body, html {
   float: left;
   border: none;
   outline: none;
-  cursor: pointer;
   padding: 14px 16px;
-  font-size: 2vh;
+  font-size: 4vmin;
   width: 25%;
   height: 10vh;
+  font-weight: 900;
 }
 
 .tablink:hover {
@@ -124,12 +127,3 @@ body, html {
   display: none;
   height: 100%;
 }
-
-#Grain {background-color: yellow;}
-#Industrial {background-color: pink;}
-#Bonds {background-color: green;}
-#Oil {background-color: brown; color: white;}
-#Silver {background-color: grey;}
-#Gold {background-color: gold;}
-#Totals {background-color: white;}
-#Graph {background-color: white;}

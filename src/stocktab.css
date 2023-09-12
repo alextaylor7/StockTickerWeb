@@ -9,15 +9,31 @@ span {
     margin-bottom: 5px;
 }
 
+table, tr {
+    width:100%;
+}
+
+td {
+    max-height:10%;
+}
+
+table {
+    height: 100%
+}
+
+#Title {
+    height: 3vmin;
+}
+
 div, input, button{
-	height:3vh;
+	height:90%;
 	min-height:3vh;
-	max-height:3vh;
 	margin-bottom: 0.4vh;
 }
 
 div, input {
 	font-size: 3vmin;
+	text-align: left;
 }
 
 button{
@@ -26,7 +42,8 @@ button{
 }
 
 .label{
-	height:3vh;
+	height: 90%;
+	min-height: 3vh;
 	margin-bottom: 0.4vh;
 	margin-right: 0.4vh;
 	text-align: right;
@@ -40,4 +57,10 @@ button{
 #turnNumber{
 	text-align: right;
 	margin-right: 10px;
+}
+
+.labelTab
+{
+    width: 25%;
+	max-width: 200px;
 }

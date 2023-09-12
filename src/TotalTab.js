@@ -35,6 +35,7 @@ export class TotalTab extends HTMLElement {
 			this.#shadowRoot.innerHTML = await res.text()
 
 			this.#liquidValue = this.#shadowRoot.getElementById("liquid")
+			this.#liquidValue.addEventListener("input", (e) => {updateNetworth()})
 			this.#networthValue = this.#shadowRoot.getElementById("networth")
 
 			this.#buyValueLabel = this.#shadowRoot.getElementById("buyTotal")
@@ -181,6 +182,11 @@ customElements.define('total-tab', TotalTab);
 var totalTab = document.querySelector("total-tab")
 
 var stockTabs = document.querySelectorAll("stock-tab")
+
+function updateNetworth()
+{
+    totalTab.setNetworth(stockTabs);
+}
 
 stockTabs.forEach(function(stockTab){
 	stockTab.addEventListener('dividendClicked', (event) => {
