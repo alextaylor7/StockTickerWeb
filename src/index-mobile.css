@@ -1,129 +1,128 @@
-stock-tab, total-tab, label-tab{
-    display:block;
-	overflow:hidden;
-	width:97%;
-	height:100%;
-	min-width: 110px;
+stock-tab,total-tab,label-tab {
+display:block;
+overflow:hidden;
+width:97%;
+height:100%;
+min-width:110px
 }
 
-table, th, td {
-  border-collapse: collapse;
-  padding: 0 0;
+table,th,td {
+border-collapse:collapse;
+padding:0
 }
 
-.stockTable{
-    height:100%;
-	width:100%;
+.stockTable {
+height:100%;
+width:100%
 }
 
-#fullTable{
-	position: absolute;
-	top: 0;
-	bottom: 0;
-	left: 0;
-	right: 0;
-	height:100%;
-	width:100%;
+#fullTable {
+position:absolute;
+top:0;
+bottom:0;
+left:0;
+right:0;
+height:100%;
+width:100%
 }
 
-#buttonRow
-{
-    height: 1%;
-    overflow:hidden;
+#buttonRow {
+height:1%;
+overflow:hidden
 }
 
-
-.stockTab
-{
-display: table-cell;
-	width:100%;
-	overflow:hidden;
-	height:100%;
-	top: 0;
-	bottom: 0;
-	left: 0;
-	right: 0;
+.stockTab {
+display:table-cell;
+width:100%;
+overflow:hidden;
+height:100%;
+top:0;
+bottom:0;
+left:0;
+right:0
 }
 
-.labelTab
-{
-    display: table-cell;
-    overflow:hidden;
-	height:100%;
-    width: 25%;
-    top: 0;
-	bottom: 0;
-	left: 0;
-	right: 0;
-	max-width: 200px;
+.labelTab {
+display:table-cell;
+overflow:hidden;
+height:100%;
+width:25%;
+top:0;
+bottom:0;
+left:0;
+right:0;
+max-width:200px
 }
 
-.totalTab
-{
-	width:32%;
+.totalTab {
+width:32%
 }
 
-#grainStock, #Grain {
-	background-color: #eeee82;
+#grainStock,#Grain {
+background-color:#eeee82
 }
 
-#industrialStock, #Industrial {
-	background-color: #ea8ad8;
+#industrialStock,#Industrial {
+background-color:#ea8ad8
 }
 
-#bondsStock, #Bonds {
-	background-color: #c5e0b3;
+#bondsStock,#Bonds {
+background-color:#c5e0b3
 }
 
-#oilStock, #Oil {
-	background-color: #302316;
-	color: #f2f2f2;
+#oilStock,#Oil {
+background-color:#302316;
+color:#f2f2f2
 }
 
-#silverStock, #Silver {
-	background-color: #f2f2f2;
+#silverStock,#Silver {
+background-color:#f2f2f2
 }
 
-#goldStock, #Gold {
-	background-color: #e3cb39;
+#goldStock,#Gold {
+background-color:#e3cb39
 }
-
-#Totals {background-color: white;}
-#Graph {background-color: white;}
 
 #chart {
-	width:100%;
-	height:100%;
+width:100%;
+height:100%
 }
 
-/* Set height of body and the document to 100% to enable "full page tabs" */
-body, html {
-  height: 100%;
-  margin: 0;
-  font-family: Arial;
+body,html {
+height:100%;
+margin:0;
+font-family:Arial
 }
 
-/* Style tab links */
 .tablink {
-  background-color: #555;
-  color: black;
-  float: left;
-  border: none;
-  outline: none;
-  padding: 14px 16px;
-  font-size: 4vmin;
-  width: 25%;
-  height: 10vh;
-  font-weight: 900;
+background-color:#555;
+color:#000;
+float:left;
+border:none;
+outline:none;
+padding:14px 16px;
+font-size:4vmin;
+width:25%;
+height:10vh;
+font-weight:900
 }
 
 .tablink:hover {
-  background-color: #777;
+background-color:#777
 }
 
-/* Style the tab content (and add height:100% for full page content) */
 .tabcontent {
-  color: black;
-  display: none;
-  height: 100%;
+color:#000;
+display:none;
+height:100%
+}
+
+#Totals,#Graph {
+background-color:#fff
+}
+
+#exportButton {
+width:25%;
+font-size:3vh;
+height:4vh;
 }

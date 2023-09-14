@@ -1,66 +1,78 @@
 span {
-	display:block;
-	overflow:hidden;
-	width:100%;
-	height:100%;
-	margin-left: 5px;
-	margin-right: 5px;
-	margin-top: 5px;
-    margin-bottom: 5px;
-}
-
-table, tr {
-    width:100%;
-}
-
-td {
-    max-height:10%;
+display:block;
+overflow:hidden;
+width:100%;
+height:100%;
+margin:5px
 }
 
 table {
-    height: 100%
+width:100%;
+height:100%
+}
+
+tr {
+width:100%
+}
+
+td {
+max-height:10%
 }
 
 #Title {
-    height: 3vmin;
+height:3vmin
 }
 
-div, input, button{
-	height:90%;
-	min-height:3vh;
-	margin-bottom: 0.4vh;
+div,input,button {
+height:90%;
+min-height:3vh;
+margin-bottom:.4vh
 }
 
-div, input {
-	font-size: 3vmin;
-	text-align: left;
+button {
+width:25%;
+font-size:4vh;
+vertical-align:top
 }
 
-button{
-	font-size: 2vh;
-	vertical-align: top;
+div {
+font-size:2.5vh;
+text-align:left
 }
 
-.label{
-	height: 90%;
-	min-height: 3vh;
-	margin-bottom: 0.4vh;
-	margin-right: 0.4vh;
-	text-align: right;
+input {
+font-size:3vh;
+text-align:left
+width:10vw;
 }
 
-#title{
-	text-align: center;
-	font-weight: 900;
+.label {
+height:90%;
+min-height:3vh;
+margin-bottom:.4vh;
+margin-right:.4vh;
+text-align:right
 }
 
-#turnNumber{
-	text-align: right;
-	margin-right: 10px;
+#title {
+text-align:center;
+font-weight:900
 }
 
-.labelTab
-{
-    width: 25%;
-	max-width: 200px;
+#turnNumber {
+text-align:right;
+margin-right:10px
+}
+
+.labelTab {
+width:25%;
+max-width:200px
+}
+
+.totalsButton {
+width:90%;
+}
+
+.stockLabel {
+font-size:4vh;
 }
